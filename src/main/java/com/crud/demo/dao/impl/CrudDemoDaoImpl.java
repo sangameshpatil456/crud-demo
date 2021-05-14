@@ -36,6 +36,11 @@ public class CrudDemoDaoImpl implements CrudDemoDao {
 
 	@Override
 	public User updateUser(User user) {
+		User userById = userRepository.findById(user.getUserId()).get();
+		userById.setUserName(user.getUserName());
+		userById.setPassword(user.getPassword());
+		userById.setUserEmail(user.getUserEmail());
+		userById.setUpdatedDateTime(new Date());
 		return userRepository.save(user);
 	}
 
@@ -43,6 +48,7 @@ public class CrudDemoDaoImpl implements CrudDemoDao {
 	public User deleteUserById(long userID) {
 		User user = userRepository.findById(userID).get();
 		user.setActive(false);
+		userRepository.save(user);
 		return user;
 	}
 
