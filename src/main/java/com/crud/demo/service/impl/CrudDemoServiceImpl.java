@@ -36,8 +36,8 @@ public class CrudDemoServiceImpl implements CrudDemoService{
 	}
 
 	@Override
-	public User deleteUserById(long userID) {
-		return crudDemoDao.deleteUserById(userID);
+	public void deleteUserById(long userID) {
+		crudDemoDao.deleteUserById(userID);
 	}
 
 }

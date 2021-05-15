@@ -12,7 +12,7 @@ import com.crud.demo.repository.UserRepository;
 
 @Repository
 public class CrudDemoDaoImpl implements CrudDemoDao {
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -36,20 +36,25 @@ public class CrudDemoDaoImpl implements CrudDemoDao {
 
 	@Override
 	public User updateUser(User user) {
-		User userById = userRepository.findById(user.getUserId()).get();
-		userById.setUserName(user.getUserName());
-		userById.setPassword(user.getPassword());
-		userById.setUserEmail(user.getUserEmail());
-		userById.setUpdatedDateTime(new Date());
-		return userRepository.save(user);
+		User userById = new User();
+		if (userRepository.findById(user.getUserId()).isPresent()) {
+			userById = userRepository.findById(user.getUserId()).get();
+			userById.setUserName(user.getUserName());
+			userById.setPassword(user.getPassword());
+			userById.setUserEmail(user.getUserEmail());
+			userById.setUpdatedDateTime(new Date());
+		}
+		return userRepository.save(userById);
 	}
 
 	@Override
-	public User deleteUserById(long userID) {
-		User user = userRepository.findById(userID).get();
-		user.setActive(false);
+	public void deleteUserById(long userID) {
+		User user = new User();
+		if (userRepository.findById(userID).isPresent()) {
+			user = userRepository.findById(userID).get();
+			user.setActive(false);
+		}
 		userRepository.save(user);
-		return user;
 	}
 
 }

@@ -24,14 +24,12 @@ public class CrudDemoController {
 
 	@GetMapping
 	public List<User> getUser() {
-		List<User> user = crudDemoService.getUser();
-		return user;
+		return crudDemoService.getUser();
 	}
 
 	@GetMapping("{userID}")
 	public User getUserById(@PathVariable(name = "userID") long userID) {
-		User user = crudDemoService.getUserById(userID);
-		return user;
+		return crudDemoService.getUserById(userID);
 	}
 
 	@PostMapping(value = "/save")
@@ -46,7 +44,7 @@ public class CrudDemoController {
 
 	@DeleteMapping("{userID}")
 	public List<User> deleteUserById(@PathVariable(name = "userID") long userID) {
-		User user = crudDemoService.deleteUserById(userID);
+		crudDemoService.deleteUserById(userID);
 		return crudDemoService.getUser();
 	}
 	

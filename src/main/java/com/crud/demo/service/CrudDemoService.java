@@ -6,14 +6,14 @@ import com.crud.demo.entity.User;
 
 public interface CrudDemoService {
 
-	public List<User> getUser();
+	List<User> getUser();
 
-	public User getUserById(long userID);
+	User getUserById(long userID);
 
-	public User saveUser(User user);
+	User saveUser(User user);
 
-	public User updateUser(User user);
+	User updateUser(User user);
 
-	public User deleteUserById(long userID);
+	void deleteUserById(long userID);
 
 }
